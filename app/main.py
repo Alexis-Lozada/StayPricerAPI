@@ -27,7 +27,7 @@ app = FastAPI(
 # Include API routers
 app.include_router(api_v1_router, prefix=settings.API_V1_STR)
 
-@app.get("/health")
+@app.get("/health", tags=["System"])
 async def health_check():
     """
     Simple health check endpoint.

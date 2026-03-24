@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from app.models.prediction_schemas import StayFeatures, PredictionResponse
 from app.services.prediction_service import prediction_service
 
-router = APIRouter()
+router = APIRouter(tags=["Predictions"])
 
 @router.post("/predict", response_model=PredictionResponse)
 async def predict_price(data: StayFeatures):
