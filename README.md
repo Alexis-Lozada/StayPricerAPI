@@ -1,91 +1,91 @@
-# StayPricerAPI 🏠💰
+# StayPricerAPI
 
-A professional FastAPI-based microservice that leverages a trained Keras/TensorFlow model to suggest accommodation prices based on capacity, rooms, and bathrooms.
+Microservicio profesional basado en FastAPI que utiliza un modelo de Keras/TensorFlow entrenado para sugerir precios de alojamiento basados en capacidad, habitaciones y baños.
 
-## 🚀 Features
+## Caracteristicas
 
-- **Machine Learning Integration**: Real-time price prediction using a pre-trained Keras model.
-- **Modular Architecture**: Clean separation of concerns (API, Services, Models, Core).
-- **International Standards**: Codebase and documentation translated to English.
-- **Versioning**: API documentation versioned under `/api/v1/`.
-- **Docker Ready**: Easy containerization for consistent deployment.
+- Integracion de Machine Learning: Prediccion de precios en tiempo real utilizando un modelo de Keras pre-entrenado.
+- Arquitectura Modular: Separacion clara de responsabilidades (API, Servicios, Modelos, Core).
+- Estandares Internacionales: Codigo base traducido al ingles para mayor compatibilidad.
+- Versionado: Documentacion de la API versionada bajo /api/v1/.
+- Listo para Docker: Facil contenedorizacion para un despliegue consistente.
 
-## 📂 Project Structure
+## Estructura del Proyecto
 
 ```text
 stay-pricer-api/
 ├── app/
-│   ├── main.py            # Entry point: initializes FastAPI and includes routers
-│   ├── api/               # API Controllers/Routers
+│   ├── main.py            # Punto de entrada: inicializa FastAPI e incluye routers
+│   ├── api/               # Controladores/Routers de la API
 │   │   └── v1/
 │   │       └── prediction_router.py
-│   ├── core/              # Configuration and constants
-│   ├── models/            # Pydantic schemas (data shapes)
-│   ├── services/          # Business logic: handles ML loading and prediction
-│   └── ml_models/         # Storage for .keras and .npz files
+│   ├── core/              # Configuracion y constantes
+│   ├── models/            # Esquemas de Pydantic (formas de datos)
+│   ├── services/          # Logica de negocio: carga de modelos y prediccion
+│   └── ml_models/         # Almacenamiento de archivos .keras y .npz
 ├── .dockerignore
-├── .env                  # Environment variables
-├── Dockerfile            # Container configuration
-├── requirements.txt      # Project dependencies
-└── README.md             # This file
+├── .env                  # Variables de entorno
+├── Dockerfile            # Configuracion del contenedor
+├── requirements.txt      # Dependencias del proyecto
+└── README.md             # Este archivo
 ```
 
-## 🛠️ Local Installation
+## Instalacion Local
 
-### Prerequisites
-- Python 3.13 (or compatible version)
+### Prerrequisitos
+- Python 3.13 (o version compatible)
 
-### Steps
-1. **Clone the repository:**
+### Pasos
+1. Clonar el repositorio:
    ```bash
    git clone https://github.com/Alexis-Lozada/StayPricerAPI.git
    cd stay-pricer-api
    ```
 
-2. **Create and activate a virtual environment:**
+2. Crear y activar un entorno virtual:
    ```bash
    python -m venv venv
-   # Windows:
+   # En Windows:
    .\venv\Scripts\Activate.ps1
-   # Linux/macOS:
+   # En Linux/macOS:
    source venv/bin/activate
    ```
 
-3. **Install dependencies:**
+3. Instalar dependencias:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Run the application:**
+4. Ejecutar la aplicacion:
    ```bash
    uvicorn app.main:app --reload
    ```
 
 ---
 
-## 🐳 Docker Usage
+## Uso con Docker
 
-1. **Build the image:**
+1. Construir la imagen:
    ```bash
    docker build -t stay-pricer-api .
    ```
 
-2. **Run the container:**
+2. Ejecutar el contenedor:
    ```bash
    docker run -d -p 8000:8000 --name stay-pricer-api stay-pricer-api
    ```
 
 ---
 
-## 📡 API Usage
+## Uso de la API
 
-Once running, access the automatic interactive documentation at:
-- **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-- **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+Una vez en ejecucion, accede a la documentacion interactiva automatica en:
+- Swagger UI: http://127.0.0.1:8000/docs
+- ReDoc: http://127.0.0.1:8000/redoc
 
-### Example Request
+### Ejemplo de Peticion
 
-**POST** `/api/v1/predict`
+POST /api/v1/predict
 
 ```json
 {
@@ -95,7 +95,7 @@ Once running, access the automatic interactive documentation at:
 }
 ```
 
-### Example Response
+### Ejemplo de Respuesta
 
 ```json
 {
@@ -106,6 +106,6 @@ Once running, access the automatic interactive documentation at:
 
 ---
 
-## ⚖️ License
+## Licencia
 
-Distributed under the MIT License. See `LICENSE` for more information (if applicable).
+Distribuido bajo la Licencia MIT. Consulta el archivo LICENSE para mas informacion (si aplica).
