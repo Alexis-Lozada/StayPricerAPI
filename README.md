@@ -1,6 +1,6 @@
 # StayPricerAPI
 
-Microservicio profesional basado en FastAPI que utiliza un modelo de Keras/TensorFlow entrenado para sugerir precios de alojamiento basados en capacidad, habitaciones y baños.
+Microservicio basado en FastAPI que utiliza un modelo de Keras/TensorFlow entrenado para sugerir precios de alojamiento basados en capacidad, habitaciones y baños.
 
 ## Caracteristicas
 
@@ -91,7 +91,10 @@ POST /api/v1/predict
 {
   "capacity": 4,
   "rooms": 2,
-  "bathrooms": 1.5
+  "bathrooms": 1.5,
+  "beds": 2,
+  "latitude": 19.4326,
+  "longitude": -99.1332
 }
 ```
 

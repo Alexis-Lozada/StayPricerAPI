@@ -7,6 +7,9 @@ class StayFeatures(BaseModel):
     capacity: int
     rooms: int
     bathrooms: float
+    beds: int
+    latitude: float
+    longitude: float
 
 class PredictionResponse(BaseModel):
     """

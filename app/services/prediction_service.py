@@ -36,8 +36,15 @@ class PredictionService:
         if self.model is None or self.scaler is None:
             raise RuntimeError("Model or scaler not loaded.")
 
-        # 1. Transform input JSON to a NumPy array
-        input_data = np.array([[features.capacity, features.rooms, features.bathrooms]])
+        # 1. Transform input JSON to a NumPy array in the exact order the model expects
+        input_data = np.array([[
+            features.capacity, 
+            features.rooms, 
+            features.bathrooms,
+            features.beds,
+            features.latitude,
+            features.longitude
+        ]])
         
         # 2. Scale the data exactly as in training
         scaled_data = self.scaler.transform(input_data)
