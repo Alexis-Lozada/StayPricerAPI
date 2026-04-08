@@ -1,0 +1,51 @@
+name: Despliegue a Cloud Run
+
+# Esto le dice a GitHub: "Ejecuta esto solo cuando haya un push a la rama main"
+on:
+  push:
+    branches:
+      - main
+
+# Variables que usaremos en los pasos
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-central1 # Cambia esto si elegiste otra región en Artifact Registry
+  REPO_NAME: stay-pricer-api # El nombre del repo que creaste en el paso 1.2
+  SERVICE_NAME: stay-pricer-api
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Descargar el código
+      uses: actions/checkout@v4
+
+    # ---------------------------------------------------------
+    # ESPACIO PARA FUTUROS PASOS:
+    # Aquí es donde en el futuro agregarás tus bloques para:
+    # - Instalar dependencias (ej. pip install -r requirements.txt)
+    # - Correr Pytest
+    # - Ejecutar el escaneo de SonarQube
+    # ---------------------------------------------------------
+
+    - name: Autenticación en Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: Configurar Docker para GCP
+      run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+    - name: Construir y Subir Imagen Docker
+      run: |
+        IMAGE_NAME=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+        docker build -t $IMAGE_NAME .
+        docker push $IMAGE_NAME
+
+    - name: Desplegar en Cloud Run
+      uses: google-github-actions/deploy-cloudrun@v2
+      with:
+        service: ${{ env.SERVICE_NAME }}
+        region: ${{ env.REGION }}
+        image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
